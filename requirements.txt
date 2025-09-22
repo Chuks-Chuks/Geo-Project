@@ -1,0 +1,11 @@
+ geopandas
+ rasterio
+ shapely
+ numpy
+ pandas
+ matplotlib
+ # Optional extras
+ folium
+ sqlalchemy
+ psycopg2
+ jupyter
