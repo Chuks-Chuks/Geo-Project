@@ -7,5 +7,5 @@
  # Optional extras
  folium
  sqlalchemy
- psycopg2
+ psycopg2-binary
  jupyter
