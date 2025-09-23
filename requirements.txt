@@ -1,11 +1,13 @@
- geopandas
- rasterio
- shapely
- numpy
- pandas
- matplotlib
- # Optional extras
- folium
- sqlalchemy
- psycopg2-binary
- jupyter
+geopandas
+rasterio
+shapely
+numpy
+pandas
+matplotlib
+# Optional extras
+folium
+sqlalchemy
+psycopg2-binary
+jupyter
+python-dotenv
+ 
