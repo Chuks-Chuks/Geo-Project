@@ -17,7 +17,7 @@ Nigeria Forest Loss Pipeline
  	•	Level 1 shapefile (state boundaries).
  
 ⚙️ Pipeline Architecture        
-        ``` text 
+        ``` 
          +---------------------+
          |  Forest Loss Raster |
          +---------------------+
