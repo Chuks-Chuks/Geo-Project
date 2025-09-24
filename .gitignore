@@ -1,3 +1,8 @@
 .pub
 .env
 .zip
+geo-project
+__pycache__
+*.pyc
+.log
+*.sqlite3
