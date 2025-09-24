@@ -1,5 +1,6 @@
-from sqlalchemy import create_engine
 from utils import log, config
+from sqlalchemy import create_engine
+
 
 settings = config.SETTINGS
 log = log.get_logger() 
@@ -11,6 +12,4 @@ class DatabaseConnect:
 
     def get_engine(self):
         return self.connect
-
-
 
