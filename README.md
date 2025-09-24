@@ -74,6 +74,9 @@ nigeria-forest-loss-pipeline/
 ## Once you clone the repo:
 ## 🗺️ Prepare Your Database and Nigeria States Data
 
+### IMPORTANT NOTE:
+The initial setup was done on an Ubuntu Virtual Machine. If any of the commands are not clear consider using your system's equivalent. 
+
 ### 🔑 Step 1: Confirm PostGIS on RDS
 
 If you are using AWS RDS for PostgreSQL, enable the PostGIS extension by running on DBeaver, pgAdmin or DataGrip. I used Postgres for the project
