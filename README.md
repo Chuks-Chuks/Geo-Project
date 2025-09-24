@@ -16,36 +16,37 @@ Nigeria Forest Loss Pipeline
  	•	Source: GADM
  	•	Level 1 shapefile (state boundaries).
  
-⚙️ Pipeline Architecture        
-        ``` 
-         +---------------------+
-         |  Forest Loss Raster |
-         +---------------------+
-                   |
-                   v
-         +---------------------+
-         | Nigeria Boundaries  |
-         +---------------------+
-                   |
-                   v
-         +---------------------+
-         |   Raster Clip       |
-         +---------------------+
-                   |
-                   v
-         +---------------------+
-         | Aggregate by State  |
-         +---------------------+
-                   |
-           +------------------+
-           | CSV / GeoJSON    |
-           +------------------+
-                   |
-                   v
-         +---------------------+
-         |  Visualization Map  |
-         +---------------------+
-        ```
+⚙️ Pipeline Architecture
+
+```text
++---------------------+
+|  Forest Loss Raster |
++---------------------+
+          |
+          v
++---------------------+
+| Nigeria Boundaries  |
++---------------------+
+          |
+          v
++---------------------+
+|   Raster Clip       |
++---------------------+
+          |
+          v
++---------------------+
+| Aggregate by State  |
++---------------------+
+          |
+    +------------------+
+    | CSV / GeoJSON    |
+    +------------------+
+          |
+          v
++---------------------+
+|  Visualization Map  |
++---------------------+
+```
 
 Tech Stack
  	•	Python: geopandas, rasterio, shapely, numpy, pandas, matplotlib
