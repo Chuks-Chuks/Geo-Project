@@ -73,20 +73,50 @@ nigeria-forest-loss-pipeline/
  │     ├── forest_loss_map.png
 ```
 # INSTRUCTIONS
-## Once you clone the repo:
-## 🗺️ Prepare Your Database and Nigeria States Data
 
-### IMPORTANT NOTE:
-The initial setup was done on an Ubuntu Virtual Machine. If any of the commands are not clear consider using your system's equivalent. 
+## 🚀 Reproducible Setup With Docker
+
+The easiest way to run this pipeline is with Docker, which ensures all dependencies are installed and configured correctly.
+
+### 🐳 Step 1: Build the Docker Image
+
+Make sure you have [Docker installed](https://docs.docker.com/get-docker/).  
+In your project root, run:
+
+```sh
+docker build -t nigeria-forest-loss-pipeline .
+```
+
+### 🐳 Step 2: Prepare Data
+
+- Download the Nigeria states shapefile and Hansen raster files as described below.
+- Place the shapefile in `data/` and the raster `.tif` files in `data/rasters/`.
+
+### 🐳 Step 3: Run the Pipeline
+
+```sh
+docker run --rm -it nigeria-forest-loss-pipeline
+```
+
+You can also mount your local data directory if you want to persist outputs or use external data:
+
+```sh
+docker run --rm -it -v "$PWD/data:/app/data" -v "$PWD/outputs:/app/outputs" nigeria-forest-loss-pipeline
+```
+
+---
+
+## 🗺️ Prepare Your Database and Nigeria States Data
 
 ### 🔑 Step 1: Confirm PostGIS on RDS
 
-If you are using AWS RDS for PostgreSQL, enable the PostGIS extension by running on DBeaver, pgAdmin or DataGrip. I used Postgres for the project
+If you are using AWS RDS for PostgreSQL, enable the PostGIS extension by running:
 
 ```sql
 CREATE EXTENSION postgis;
 ```
-Or for ease, I already created a `create_extension.sql` file. If you have psql installed you can simply run:
+
+Or, use the provided `create_extension.sql` file with `psql`:
 
 ```sh
 psql -h <your-rds-endpoint> -U <dbuser> -d <dbname> -p 5432 -f create_extension.sql
@@ -97,10 +127,11 @@ psql -h <your-rds-endpoint> -U <dbuser> -d <dbname> -p 5432 -f create_extension.
 ---
 
 ### 📂 Step 2: Get the Nigeria States Shapefile
+
 Download the Nigeria Level 1 (state boundaries) shapefile from GADM:
 
 ```sh
-curl -O https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_NGA_shp.zip
+wget https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_NGA_shp.zip
 unzip gadm41_NGA_shp.zip -d data/
 ```
 
@@ -110,12 +141,15 @@ This will extract files including `gadm41_NGA_1.shp` (Nigeria states).
 
 ### 🛠️ Step 3: Load Shapefile into RDS
 
-If you’re on Ubuntu, install GDAL tools if not already: (I created a EC2 instance and created the needed setup)
+If you’re on Ubuntu, install GDAL tools:
 
 ```sh
 sudo apt-get update
 sudo apt-get install gdal-bin
 ```
+
+On **Windows**, use [OSGeo4W](https://trac.osgeo.org/osgeo4w/) or [GDAL binaries](https://gdal.org/download.html) to install GDAL/OGR tools.  
+Use [wget for Windows](https://eternallybored.org/misc/wget/) and [unzip](https://gnuwin32.sourceforge.net/packages/unzip.htm) if needed, or extract ZIP files with Windows Explorer.
 
 Then load the shapefile into your RDS/PostGIS database (replace placeholders with your actual credentials):
 
@@ -131,7 +165,6 @@ ogr2ogr -f "PostgreSQL" \
 ✅ This will create a table `nigeria_states` with all 36 states plus FCT.
 
 ---
-However, if you can't go throgh the stress of creating a VM then research on how to ensure you have gdal up and running.
 
 ## 📥 Download Required Data
 
@@ -143,3 +176,9 @@ Before running the pipeline, download the following Hansen Global Forest Change 
 - [Hansen_GFC-2024-v1.12_lossyear_20N_010E.tif](https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/Hansen_GFC-2024-v1.12_lossyear_20N_010E.tif)
 
 **After cloning this repository, place the downloaded `.tif` files in `data/rasters/`.**
+
+---
+
+> **Note:**  
+> You can run the pipeline either locally (with Python and all dependencies installed) or inside Docker for maximum reproducibility.  
+> Docker is recommended for new users and for sharing your work across different systems.
