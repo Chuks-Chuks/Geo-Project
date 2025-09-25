@@ -15,4 +15,7 @@ class Settings:
     db_pass: str | None = os.getenv("DB_PASS")
     db_schema: str | None = os.getenv("DB_SCHEMA")
 
+    # coordinates
+    nigeria_center: str | None = os.getenv("NIGERIA_CENTER", "9.0820,8.6753")
+
 SETTINGS = Settings()
