@@ -179,6 +179,28 @@ Before running the pipeline, download the following Hansen Global Forest Change 
 
 ---
 
+## ⚡️ Before Running the Streamlit App
+
+**Update your `.env` file:**  
+Make sure your `.env` file includes the following line to set the center coordinates for Nigeria:
+
+```
+NIGERIA_CENTER=9.0820,8.6753
+```
+
+This ensures the map centers correctly in the Streamlit dashboard.
+
+---
+
+## ▶️ Run the Streamlit App
+
+After updating your `.env` file, start the dashboard with:
+
+```sh
+streamlit run app.py
+```
+---
+
 > **Note:**  
 > You can run the pipeline either locally (with Python and all dependencies installed) or inside Docker for maximum reproducibility.  
 > Docker is recommended for new users and for sharing your work across different systems.
