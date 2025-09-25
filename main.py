@@ -1,5 +1,5 @@
 from pipeline.mosaic_tiles import MosaicTiles
-from pipeline.etl_pipeline import ClipStates 
+from pipeline.clip_states import ClipStates 
 from pipeline.analyze_loss import AnalyzeLoss
 from utils.log import get_logger
 
